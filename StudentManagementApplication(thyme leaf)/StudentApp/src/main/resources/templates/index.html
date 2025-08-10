@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Data</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+<div class="container">
+    <div class="form-header">
+        <h2>All Student Data here!</h2>
+        <a href="/add" class="add-button">Add Student</a>
+    </div>
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Student Name</th>
+            <th>Student Email</th>
+            <th>Student Age</th>
+			<th>Student DOB</th>
+            <th>Student Address</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="s : ${list}">
+            <td th:text="${s.id}"></td>
+            <td th:text="${s.studentName}"></td>
+            <td th:text="${s.studentEmail}"></td>
+            <td th:text="${s.studentAge}"></td>
+			<td th:text="${s.studentDoB}"></td>
+            <td th:text="${s.studentAddress}"></td>
+            <td>
+                <a th:href="@{'/edit/'+${s.id}}">
+                    <i class="fa-solid fa-pen-to-square" style="color: #0300a3;"></i>
+                </a>
+                <a th:href="@{'/delete/'+${s.id}}" onclick="return confirm('Are you sure?')">
+                    <i class="fa-solid fa-trash" style="color: #ff351f;"></i>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

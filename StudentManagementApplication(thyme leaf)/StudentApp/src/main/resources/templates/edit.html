@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+     <title > Edit Student Data</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	 <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+  <div class="edit-container">
+    <h2>Edit Student Data here!</h2>
+    <form th:action="@{/update}" th:object="${student}" method="post">
+      <input type="hidden" th:field="*{id}" />
+      Student Name:-<input type="text" th:field="*{studentName}" /><br />
+      Student Email:-<input type="text" th:field="*{studentEmail}" /><br />
+      Student Age:-<input type="number" th:field="*{studentAge}" /><br />
+	  Student DOB:-<input type="date" th:field="*{studentDoB}" /><br />
+      Student Address:-<input type="text" th:field="*{studentAddress}" /><br />
+      <button type="submit">Update</button>
+    </form>
+  </div>
+</body>
+</html>
