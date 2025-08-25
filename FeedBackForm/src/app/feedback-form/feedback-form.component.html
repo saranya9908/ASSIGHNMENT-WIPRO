@@ -1,0 +1,47 @@
+<mat-card>
+  <mat-card-title class="form-title">Feedback Form</mat-card-title>
+
+  <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+    <!-- Name -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="submitted && f['name'].errors?.['required']">Name is required</mat-error>
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      <mat-error *ngIf="submitted && f['email'].errors?.['required']">Email is required</mat-error>
+      <mat-error *ngIf="submitted && f['email'].errors?.['email']">Invalid email</mat-error>
+    </mat-form-field>
+
+    <!-- Subject -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Subject</mat-label>
+      <input matInput formControlName="subject" />
+      <mat-hint align="end">{{ f['subject'].value?.length || 0 }}/40</mat-hint>
+      <mat-error *ngIf="submitted && f['subject'].errors?.['required']">Subject is required</mat-error>
+      <mat-error *ngIf="submitted && f['subject'].errors?.['maxlength']">Max 40 characters</mat-error>
+    </mat-form-field>
+
+    <!-- Comments -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Comments / Issue</mat-label>
+      <textarea matInput rows="5" formControlName="comments"></textarea>
+      <mat-hint align="end">{{ f['comments'].value?.length || 0 }}/350</mat-hint>
+      <mat-error *ngIf="submitted && f['comments'].errors?.['required']">Comments are required</mat-error>
+      <mat-error *ngIf="submitted && f['comments'].errors?.['maxlength']">Max 350 characters</mat-error>
+    </mat-form-field>
+
+    <!-- Submit -->
+    <button mat-raised-button color="primary" type="submit" [disabled]="feedbackForm.invalid">
+      Submit
+    </button>
+  </form>
+
+  <div *ngIf="submitted && feedbackForm.valid" class="thank-you">
+    <p><strong>Thank you! We will get back to you shortly.</strong></p>
+  </div>
+</mat-card>

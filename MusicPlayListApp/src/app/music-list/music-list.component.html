@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="filters">
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>Filter by Artist</mat-label>
+      <mat-select [(ngModel)]="selectedArtist">
+        <mat-option value="">All</mat-option>
+        <mat-option *ngFor="let artist of artists" [value]="artist">
+          {{ artist }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>Filter by Album</mat-label>
+      <mat-select [(ngModel)]="selectedAlbum">
+        <mat-option value="">All</mat-option>
+        <mat-option *ngFor="let album of albums" [value]="album">
+          {{ album }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="song-grid">
+    <mat-card
+      *ngFor="let song of filteredSongs"
+      [ngClass]="{ 'top-rated': isTopRated(song) }"
+      class="song-card"
+    >
+      <mat-card-header>
+        <mat-card-title>{{ song.name }}</mat-card-title>
+        <mat-card-subtitle>{{ song.artist }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <!-- Song Image -->
+      <img mat-card-image [src]="song.imageUrl" [alt]="song.name + ' cover'" class="song-image" />
+
+      <mat-card-content>
+        <p><strong>Album:</strong> {{ song.album }}</p>
+        <p><strong>Duration:</strong> {{ song.duration }}</p>
+        <p>
+          <strong>Rating:</strong>
+          <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+            <mat-icon class="star">
+              {{ i < song.rating ? 'star' : 'star_border' }}
+            </mat-icon>
+          </ng-container>
+        </p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-icon-button aria-label="Play song">
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
